@@ -1,6 +1,6 @@
 # TAX CREdiT: TAXonomic ClassifieR Evaluation Tool
 
-[![Build Status](https://travis-ci.org/caporaso-lab/tax-credit.svg?branch=master)](https://travis-ci.org/caporaso-lab/tax-credit)
+[![Build Status](https://travis-ci.org/caporaso-lab/tax-credit-code.svg?branch=master)](https://travis-ci.org/caporaso-lab/tax-credit-code)
 
 This repository contains code from the [tax-credit](https://github.com/caporaso-lab/tax-credit) project, a standardized and extensible evaluation framework for bioinformatic methods.
 
