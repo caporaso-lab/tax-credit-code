@@ -7,6 +7,7 @@ from os.path import join
 import tempfile
 import sys
 import multiprocessing
+from shutil import rmtree
 
 import qiime2
 from qiime2.sdk import Artifact
@@ -23,9 +24,13 @@ from q2_types.tree import NewickFormat, Phylogeny, Rooted
 @click.argument('output_file', type=click.Path(exists=False))
 @click.option('--reference_alignment', type=click.Path(exists=True))
 @click.option('--reference_phylogeny', type=click.Path(exists=True))
-def run_sepp(input_fragment_file, output_file, method, tmpdir, cores, reference_alignment, reference_phylogeny):
+@click.option('--reference_name', default=None, required=False)  # this is a dummy to allow tax-credit's framework to record reference name as a parameter 
+def run_sepp(input_fragment_file, output_file, method, tmpdir, cores, reference_alignment, reference_phylogeny, reference_name):
+    clear_tmpdir = False
+
     if tmpdir is None:
         tmpdir = tempfile.mkdtemp()
+        clear_tmpdir = True
     if not os.path.exists(tmpdir):
         raise ValueError("Temporary working directory '%s' does not exists." % tmpdir)
     sys.stderr.write("Using '%s' as temporary working directory.\n" % tmpdir)
@@ -58,9 +63,10 @@ def run_sepp(input_fragment_file, output_file, method, tmpdir, cores, reference_
             reference_alignment=ar_ref_aln.view(AlignedDNASequencesDirectoryFormat) if reference_alignment is not None else None,
             reference_phylogeny=ar_ref_tree.view(NewickFormat) if reference_phylogeny is not None else None)
         # save tree to file
-        Artifact.import_data(Phylogeny[Rooted], ar_tree).save(fp_insertion_tree)
+        ar_tree = Artifact.import_data(Phylogeny[Rooted], ar_tree)
+        ar_tree.save(fp_insertion_tree)
     else:
-        ar_tree = Artifact.load(fp_insertion_tree)
+        ar_tree = Artifact.load(fp_insertion_tree) #.view(NewickFormat)
 
     taxonomy = None
     if method == 'otus':
@@ -82,7 +88,12 @@ def run_sepp(input_fragment_file, output_file, method, tmpdir, cores, reference_
     taxonomy['num hits'] = 1
 
     # write results to file
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
     taxonomy.to_csv(output_file, sep="\t")
+
+    if clear_tmpdir:
+        rmtree(tmpdir)
+
 
 if __name__ == "__main__":
     run_sepp()
