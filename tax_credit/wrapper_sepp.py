@@ -24,7 +24,7 @@ from q2_types.tree import NewickFormat, Phylogeny, Rooted
 @click.argument('output_file', type=click.Path(exists=False))
 @click.option('--reference_alignment', type=click.Path(exists=True))
 @click.option('--reference_phylogeny', type=click.Path(exists=True))
-@click.option('--reference_name', default=None, required=False)  # this is a dummy to allow tax-credit's framework to record reference name as a parameter 
+@click.option('--reference_name', default=None, required=False)  # this is a dummy to allow tax-credit's framework to record reference name as a parameter
 def run_sepp(input_fragment_file, output_file, method, tmpdir, cores, reference_alignment, reference_phylogeny, reference_name):
     clear_tmpdir = False
 
@@ -90,6 +90,7 @@ def run_sepp(input_fragment_file, output_file, method, tmpdir, cores, reference_
     # write results to file
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     taxonomy.to_csv(output_file, sep="\t")
+    sys.stderr.write("Wrote results to '%s'.\n" % output_file)
 
     if clear_tmpdir:
         rmtree(tmpdir)
