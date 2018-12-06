@@ -224,7 +224,7 @@ class EvalFrameworkTests(TestCase):
     def setUpClass(self):
         _table1 = """{"id": "None",
                       "format": "Biological Observation Matrix 1.0.0",
-                      "format_url": "http:\/\/biom-format.org",
+                      "format_url": "http://biom-format.org",
                       "type": "OTU table",
                       "generated_by": "greg",
                       "date": "2013-08-22T13:10:23.907145",
@@ -355,7 +355,7 @@ class EvalFrameworkTests(TestCase):
 
         _table2 = """{"id": "None",
                       "format": "Biological Observation Matrix 1.0.0",
-                      "format_url": "http:\/\/biom-format.org",
+                      "format_url": "http://biom-format.org",
                       "type": "OTU table",
                       "generated_by": "greg",
                       "date": "2013-08-22T13:19:35.281188",
@@ -460,7 +460,7 @@ class EvalFrameworkTests(TestCase):
 
         _table3 = """{"id": "None",
                       "format": "Biological Observation Matrix 1.0.0",
-                      "format_url": "http:\/\/biom-format.org",
+                      "format_url": "http://biom-format.org",
                       "type": "OTU table",
                       "generated_by": "BIOM-Format 1.1.2",
                       "date": "2013-06-13T09:41:43.709874",

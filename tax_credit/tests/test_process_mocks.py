@@ -33,7 +33,7 @@ class EvalFrameworkTests(TestCase):
     def setUp(self):
         _table1 = """{"id": "None",
                       "format": "Biological Observation Matrix 1.0.0",
-                      "format_url": "http:\/\/biom-format.org",
+                      "format_url": "http://biom-format.org",
                       "type": "OTU table",
                       "generated_by": "greg",
                       "date": "2013-08-22T13:10:23.907145",
