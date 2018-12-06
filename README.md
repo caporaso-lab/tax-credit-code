@@ -8,10 +8,10 @@ Please see the [tax-credit-data](https://github.com/caporaso-lab/tax-credit-data
 
 Setup and install
 -----------------
-The library code and can be installed as follows:
+The library code can be installed as follows:
 
 ```
-git clone https://github.com/gregcaporaso/tax-credit-code.git
+git clone https://github.com/caporaso-lab/tax-credit-code.git
 cd tax-credit-code
 pip install .
 ```
